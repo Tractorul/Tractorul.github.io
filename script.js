@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Gallery Filtering Setup
     const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
 
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Lightbox Setup with Captions
     const allGalleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
     if (allGalleryImages.length > 0) {
         let viewer = document.getElementById('photoViewer');
@@ -96,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             openViewer(currentIndex - 1);
         }
 
-        // Attach click handlers to gallery images
         allGalleryImages.forEach(img => {
             img.style.cursor = 'pointer';
             img.addEventListener('click', () => {
@@ -108,19 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Control event listeners
         closeBtn.addEventListener('click', closeViewer);
         nextBtn.addEventListener('click', showNext);
         prevBtn.addEventListener('click', showPrev);
 
-        // Close when clicking overlay outside the image and control buttons
         viewer.addEventListener('click', (e) => {
             if (e.target === viewer) {
                 closeViewer();
             }
         });
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!viewer.classList.contains('active')) return;
 
@@ -134,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Smooth Back To Top behavior
     const backToTopLink = document.querySelector('.back-to-top');
     if (backToTopLink) {
         backToTopLink.addEventListener('click', (e) => {

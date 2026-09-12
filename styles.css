@@ -15,11 +15,11 @@ body {
 }
 
 .navbar {
-    position: fixed;   
-    top: 0;            
-    left: 50%;         
+    position: fixed;
+    top: 0;
+    left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;     
+    z-index: 1000;
     width: 90%;
     max-width: 1200px;
 }
@@ -30,7 +30,7 @@ body {
     gap: 25px;
     padding: 10px 20px;
     background-color: var(--color-navbar-bg);
-    margin: 0;         
+    margin: 0;
 }
 
 .navbar a {
