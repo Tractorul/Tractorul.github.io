@@ -1,43 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta name="description" content="andreuptm - Urban & transport photography portfolio based in Bucharest, Romania. Moments in transit, city motion, and architectural geometry.">
-        <meta property="og:title" content="andreuptm's Portfolio - Urban & Transport Photography">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="andreuptm - Urban & transport photography portfolio based in Bucharest, Romania. Moments in transit, city motion, and aviation geometry.">
+        <meta property="og:title" content="andreuptm - Urban & Transport Photography">
         <meta property="og:description" content="Capturing moments in transit, public transport, and urban life in Bucharest, Romania.">
         <meta property="og:image" content="images/astra.jpg">
         <meta property="og:type" content="website">
         <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+        
         <link rel="stylesheet" href="styles.css">
-        <title>andreuptm's Portfolio</title>
+        <title>andreuptm &bull; Urban & Transport Photography</title>
     </head>
     <body>
-        <div class="hero">
-        <nav class="navbar" >
-            <ul><li><a href="index.html" class="active">Home</a> </li>
-                <li><a href="photography.html">Photography</a></li>
-               <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="wlcm">
-            <h1>Andreuptm's Photography</h1>
-            <p>Moments I've captured..</p>
-            <a href="photography.html" class="hero-btn">View Gallery &rarr;</a>
-        </div>
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-brand">
+                        <span class="brand-name">andreuptm</span>
+                        <span class="brand-badge">PHOTOGRAPHY</span>
+                    </a>
+                    
+                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
 
-    </div>
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-tag">
+                        <span class="dot"></span> Bucharest, Romania &bull; Urban &amp; Transit
+                    </div>
+                    <h1>Capturing Motion &amp; Architecture</h1>
+                    <p class="hero-subtitle">Moments in transit, street perspective, and aviation geometry captured through the lens.</p>
+                    <div class="hero-actions">
+                        <a href="photography.html" class="btn btn-primary">View Gallery &rarr;</a>
+                        <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-overview">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Explore Categories</h2>
+                        <p>A collection of street, public transport, and airshow photography.</p>
+                    </div>
+                    <div class="category-cards">
+                        <a href="photography.html?filter=transit" class="category-card">
+                            <img src="images/astra.jpg" alt="Transit Photography - Trams and Public Transport" loading="lazy">
+                            <div class="card-content">
+                                <span class="card-tag">Category</span>
+                                <h3>Transit</h3>
+                                <p>Trams, buses, and city movement</p>
+                            </div>
+                        </a>
+                        <a href="photography.html?filter=urban" class="category-card">
+                            <img src="images/2.jpg" alt="Urban Photography - Bucharest City Life" loading="lazy">
+                            <div class="card-content">
+                                <span class="card-tag">Category</span>
+                                <h3>Urban</h3>
+                                <p>Bucharest streets and architecture</p>
+                            </div>
+                        </a>
+                        <a href="photography.html?filter=aviation" class="category-card">
+                            <img src="images/bias 1.jpg" alt="Aviation Photography - BIAS Airshow" loading="lazy">
+                            <div class="card-content">
+                                <span class="card-tag">Category</span>
+                                <h3>Aviation</h3>
+                                <p>BIAS Bucharest International Airshow</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
-            <div class="footer-links">
-                <a href="https://instagram.com/andreuptm" target="_blank">Instagram</a>
-                <a href="https://github.com/Tractorul" target="_blank">GitHub</a>
-                <a href="mailto:razvanperjeru@icloud.com">Email</a>
-                <a href="#top" class="back-to-top">&uarr; Top</a>
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <p class="footer-title">&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
+                    <p class="footer-sub">Based in Bucharest, Romania</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://instagram.com/andreuptm" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://github.com/Tractorul" target="_blank" rel="noopener">GitHub</a>
+                    <a href="mailto:razvanperjeru@icloud.com">Email</a>
+                    <a href="#top" class="back-to-top" aria-label="Back to Top">&uarr; Top</a>
+                </div>
             </div>
         </footer>
 
         <script src="script.js" defer></script>
     </body>
-
 </html>

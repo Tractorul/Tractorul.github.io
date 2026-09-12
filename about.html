@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="About @andreuptm - Bucharest based urban and transport photographer capturing public spaces, geometry, and motion with Nikon gear.">
         <meta property="og:title" content="About - andreuptm">
@@ -8,54 +9,113 @@
         <meta property="og:image" content="images/me.jpg">
         <meta property="og:type" content="profile">
         <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="styles.css">
         <title>About - andreuptm</title>
     </head>
     <body>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="photography.html">Photography</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <section class="about">
-            <div class="about-img">
-                <img src="images/me.jpg" alt="Portrait of andreuptm - Bucharest urban photographer">
-            </div>
-            <div class="about-content">
-                <h1>About me!</h1>
-                <hr>
-                <br>
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-brand">
+                        <span class="brand-name">andreuptm</span>
+                        <span class="brand-badge">PHOTOGRAPHY</span>
+                    </a>
+                    
+                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
 
-                <p class="tagline">Capturing moments in transit and urban life.</p>
-                
-                <p>I'm @andreuptm, an urban and transport photographer based in Bucharest,Romania. My work focuses on finding beauty in everyday public spaces, arhitectural geometry and all of the city's motion.</p>
-                <br>
-                
-                <div class="gear-selection" >
-                    <h3>My Kit</h3>
-                    <br>
-                    <ul>
-                        <li><strong>Body :</strong> Nikon D7000</li>
-                        <li><strong>Lens :</strong> AF-S NIKKOR 18-55mm f3.5-5.6G VR DX, kit lens</li>
-                        <li><strong>Editing :</strong> Adobe Lightroom / Adobe Photoshop</li>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html" class="active">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="social-btn">
-                <a href="https://instagram.com/andreuptm">insta Page!</a>
-            </div>
-        </section>
+            </nav>
+        </header>
+
+        <main class="page-main">
+            <section class="about-hero">
+                <div class="container about-grid">
+                    <div class="about-img-wrapper">
+                        <img src="images/me.jpg" alt="Portrait of andreuptm - Bucharest urban photographer">
+                        <div class="location-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Bucharest, Romania
+                        </div>
+                    </div>
+                    <div class="about-content">
+                        <span class="section-subtitle">Biography &amp; Kit</span>
+                        <h1>About Me</h1>
+                        <p class="tagline">Capturing moments in transit, public transport, and urban geometry.</p>
+                        
+                        <p class="bio-text">I'm <strong>@andreuptm</strong>, an urban, transport, and aviation photographer based in Bucharest, Romania. My work focuses on capturing everyday public movement, architectural geometry, city motion, and airshow dynamics.</p>
+
+                        <div class="gear-section">
+                            <h3>Gear &amp; Equipment</h3>
+                            <div class="gear-grid">
+                                <div class="gear-card">
+                                    <div class="gear-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                    </div>
+                                    <div class="gear-details">
+                                        <span class="gear-label">Camera Body</span>
+                                        <strong>Nikon D7000</strong>
+                                    </div>
+                                </div>
+                                <div class="gear-card">
+                                    <div class="gear-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                                    </div>
+                                    <div class="gear-details">
+                                        <span class="gear-label">Lens</span>
+                                        <strong>AF-S NIKKOR 18-55mm f/3.5-5.6G VR DX</strong>
+                                    </div>
+                                </div>
+                                <div class="gear-card">
+                                    <div class="gear-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                    </div>
+                                    <div class="gear-details">
+                                        <span class="gear-label">Post-Processing</span>
+                                        <strong>Adobe Lightroom &amp; Photoshop</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-actions">
+                            <a href="https://instagram.com/andreuptm" target="_blank" rel="noopener" class="btn btn-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                Follow on Instagram
+                            </a>
+                            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
-            <div class="footer-links">
-                <a href="https://instagram.com/andreuptm" target="_blank">Instagram</a>
-                <a href="https://github.com/Tractorul" target="_blank">GitHub</a>
-                <a href="mailto:razvanperjeru@icloud.com">Email</a>
-                <a href="#top" class="back-to-top">&uarr; Top</a>
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <p class="footer-title">&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
+                    <p class="footer-sub">Based in Bucharest, Romania</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://instagram.com/andreuptm" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://github.com/Tractorul" target="_blank" rel="noopener">GitHub</a>
+                    <a href="mailto:razvanperjeru@icloud.com">Email</a>
+                    <a href="#top" class="back-to-top" aria-label="Back to Top">&uarr; Top</a>
+                </div>
             </div>
         </footer>
 

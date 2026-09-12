@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Get in touch with @andreuptm for photography projects, collaborations, or questions. Email, Instagram DM, and GitHub.">
         <meta property="og:title" content="Contact - andreuptm">
@@ -8,56 +9,93 @@
         <meta property="og:image" content="images/andreuptm.jpg">
         <meta property="og:type" content="website">
         <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="styles.css">
         <title>Contact - andreuptm</title>
     </head>
     <body>
-        <nav class="navbar" >
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="photography.html">Photography</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </div>
-        <section class="contact" >
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-brand">
+                        <span class="brand-name">andreuptm</span>
+                        <span class="brand-badge">PHOTOGRAPHY</span>
+                    </a>
+                    
+                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
 
-            <h2 class="contact-me">Contact me!</h2>
-            <h3 class="get-contact">Let's get in touch.</h3>
-            <br>
-            <p class="qs">Have a question, want to talk photography, or interested in one of my projects?</p>
-        <br>
-        <div class="contact-methods">
-                <ul>
-                    <li>
-                        <h3 id="contact-a">Send me an Email</h3>
-                        <br>
-                        <a class="mail" href="mailto:razvanperjeru@icloud.com">Email!</a> 
-                    </li>
-                    <br>
-                    <li>
-                        <h3 id="contact-b">Send me a DM on insta!</h3>
-                        <br>
-                        <a class="insta-btn" href="https://instagram.com/andreuptm">Click to dm me!</a>
-                    </li>
-                    <br>
-                    <li>
-                        <h3 id="contact-c">Or, take a look at my github page to see what ive been building!</h3>
-                        <br>
-                        <a class="github-btn" href="https://github.com/Tractorul">Github</a>
-                    </li>
-                </ul>
-                
-        </div>
-        </section>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="photography.html">Photography</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="page-main">
+            <section class="contact-section">
+                <div class="container">
+                    <div class="contact-header">
+                        <span class="section-subtitle">Get In Touch</span>
+                        <h1>Contact &amp; Collaborations</h1>
+                        <p class="qs">Have a project in mind, want to discuss transit/urban photography, or collaborate?</p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <h3>Send an Email</h3>
+                            <p>Reach out directly for inquiries or photo usage rights.</p>
+                            <a class="contact-btn mail-btn" href="mailto:razvanperjeru@icloud.com">razvanperjeru@icloud.com &rarr;</a>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </div>
+                            <h3>Instagram Direct Message</h3>
+                            <p>Check out my latest daily uploads and message me on Instagram.</p>
+                            <a class="contact-btn insta-btn" href="https://instagram.com/andreuptm" target="_blank" rel="noopener">@andreuptm &rarr;</a>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </div>
+                            <h3>GitHub Workspace</h3>
+                            <p>Explore my open-source projects, code repositories, and portfolio source.</p>
+                            <a class="contact-btn github-btn" href="https://github.com/Tractorul" target="_blank" rel="noopener">@Tractorul &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
-            <div class="footer-links">
-                <a href="https://instagram.com/andreuptm" target="_blank">Instagram</a>
-                <a href="https://github.com/Tractorul" target="_blank">GitHub</a>
-                <a href="mailto:razvanperjeru@icloud.com">Email</a>
-                <a href="#top" class="back-to-top">&uarr; Top</a>
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <p class="footer-title">&copy; 2026 andreuptm &bull; Urban &amp; Transport Photography</p>
+                    <p class="footer-sub">Based in Bucharest, Romania</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://instagram.com/andreuptm" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://github.com/Tractorul" target="_blank" rel="noopener">GitHub</a>
+                    <a href="mailto:razvanperjeru@icloud.com">Email</a>
+                    <a href="#top" class="back-to-top" aria-label="Back to Top">&uarr; Top</a>
+                </div>
             </div>
         </footer>
 
