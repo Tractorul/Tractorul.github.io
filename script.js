@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Hamburger Navigation Toggle
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Category Filtering & Count Badges
     const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
 
@@ -62,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (filterBtns.length > 0 && galleryItems.length > 0) {
         updateCategoryCounts();
 
-        // Check URL search params for pre-applied filter e.g. photography.html?filter=transit
         const urlParams = new URLSearchParams(window.location.search);
         const filterParam = urlParams.get('filter');
         if (filterParam) {
@@ -77,18 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function getVisibleImages() {
-        return galleryItems
-            .filter(item => !item.classList.contains('hidden'))
-            .map(item => item.querySelector('img'))
-            .filter(Boolean);
+    function getVisibleItems() {
+        return galleryItems.filter(item => !item.classList.contains('hidden'));
     }
 
-    // 3. Upgraded Lightbox Photo Viewer
     const allGalleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
     if (allGalleryImages.length > 0) {
         let viewer = document.getElementById('photoViewer');
-        let viewerImg, closeBtn, prevBtn, nextBtn, viewerCaption, viewerCounter;
+        let viewerImg, closeBtn, prevBtn, nextBtn, viewerCaption, viewerCounter, viewerExif, fullscreenBtn;
 
         if (!viewer) {
             viewer = document.createElement('div');
@@ -97,12 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
             viewer.innerHTML = `
                 <div class="viewer-header">
                     <span class="viewer-counter" id="viewerCounter">1 of 1</span>
-                    <button type="button" class="viewer-close" id="viewerClose" aria-label="Close Lightbox">&times;</button>
+                    <div class="viewer-header-actions">
+                        <button type="button" class="viewer-tool-btn" id="viewerFullscreen" aria-label="Toggle Fullscreen">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                        </button>
+                        <button type="button" class="viewer-close" id="viewerClose" aria-label="Close Lightbox">&times;</button>
+                    </div>
                 </div>
                 <button type="button" class="viewer-prev" id="viewerPrev" aria-label="Previous Photo">&lsaquo;</button>
                 <div class="viewer-container">
                     <img class="viewer-image" id="viewerImg" src="" alt="Photo Full View">
                     <div class="viewer-caption" id="viewerCaption"></div>
+                    <div class="viewer-exif" id="viewerExif"></div>
                 </div>
                 <button type="button" class="viewer-next" id="viewerNext" aria-label="Next Photo">&rsaquo;</button>
             `;
@@ -115,15 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn = document.getElementById('viewerNext');
         viewerCaption = document.getElementById('viewerCaption');
         viewerCounter = document.getElementById('viewerCounter');
+        viewerExif = document.getElementById('viewerExif');
+        fullscreenBtn = document.getElementById('viewerFullscreen');
 
         let currentIndex = 0;
 
         function openViewer(index) {
-            const visibleImages = getVisibleImages();
-            if (visibleImages.length === 0) return;
+            const visibleItems = getVisibleItems();
+            if (visibleItems.length === 0) return;
 
-            currentIndex = (index + visibleImages.length) % visibleImages.length;
-            const targetImg = visibleImages[currentIndex];
+            currentIndex = (index + visibleItems.length) % visibleItems.length;
+            const targetItem = visibleItems[currentIndex];
+            const targetImg = targetItem.querySelector('img');
             if (!targetImg) return;
 
             viewerImg.src = targetImg.src;
@@ -135,8 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 viewerCaption.style.display = captionText ? 'block' : 'none';
             }
 
+            if (viewerExif) {
+                const camera = targetItem.dataset.camera || 'Nikon D7000';
+                const location = targetItem.dataset.location || 'Bucharest, Romania';
+                const category = targetItem.dataset.category || 'Transit';
+                const categoryFormatted = category.charAt(0).toUpperCase() + category.slice(1);
+                viewerExif.innerHTML = `
+                    <span class="exif-tag">${categoryFormatted}</span>
+                    <span class="exif-meta">&bull; ${camera}</span>
+                    <span class="exif-meta">&bull; ${location}</span>
+                `;
+            }
+
             if (viewerCounter) {
-                viewerCounter.textContent = `${currentIndex + 1} of ${visibleImages.length}`;
+                viewerCounter.textContent = `${currentIndex + 1} of ${visibleItems.length}`;
             }
 
             viewer.classList.add('active');
@@ -146,6 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
         function closeViewer() {
             viewer.classList.remove('active');
             document.body.style.overflow = '';
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
             setTimeout(() => {
                 if (!viewer.classList.contains('active')) {
                     viewerImg.src = '';
@@ -161,12 +178,18 @@ document.addEventListener('DOMContentLoaded', () => {
             openViewer(currentIndex - 1);
         }
 
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                viewer.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                if (!img) return;
-                const visibleImages = getVisibleImages();
-                const visibleIndex = visibleImages.indexOf(img);
+                const visibleItems = getVisibleItems();
+                const visibleIndex = visibleItems.indexOf(item);
                 if (visibleIndex !== -1) {
                     openViewer(visibleIndex);
                 }
@@ -176,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', closeViewer);
         nextBtn.addEventListener('click', showNext);
         prevBtn.addEventListener('click', showPrev);
+        if (fullscreenBtn) {
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+        }
 
         viewer.addEventListener('click', (e) => {
             if (e.target === viewer || e.target.classList.contains('viewer-container')) {
@@ -192,10 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 showNext();
             } else if (e.key === 'ArrowLeft') {
                 showPrev();
+            } else if (e.key === 'f' || e.key === 'F') {
+                toggleFullscreen();
             }
         });
 
-        // Touch Swipe Support for Mobile Lightbox
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -211,14 +238,49 @@ document.addEventListener('DOMContentLoaded', () => {
         function handleSwipe() {
             const swipeThreshold = 40;
             if (touchEndX < touchStartX - swipeThreshold) {
-                showNext(); // Swiped left -> Next photo
+                showNext();
             } else if (touchEndX > touchStartX + swipeThreshold) {
-                showPrev(); // Swiped right -> Prev photo
+                showPrev();
             }
         }
     }
 
-    // 4. Back to Top Link Smooth Scroll
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const toast = document.getElementById('toast');
+
+    if (copyEmailBtn && toast) {
+        copyEmailBtn.addEventListener('click', () => {
+            const email = 'razvanperjeru@icloud.com';
+            navigator.clipboard.writeText(email).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2800);
+            }).catch(() => {
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2800);
+            });
+        });
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', function(e) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Sending Message...</span>`;
+        });
+    }
+
     const backToTopLink = document.querySelector('.back-to-top');
     if (backToTopLink) {
         backToTopLink.addEventListener('click', (e) => {
