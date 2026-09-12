@@ -15,11 +15,11 @@ body {
 }
 
 .navbar {
-    position: fixed;   /* Pulls it out of the hero's centering logic */
-    top: 0;            /* Sticks it to the very top */
-    left: 50%;         /* Moves it to the middle horizontally */
-    transform: translateX(-50%); /* Offsets it to perfect center */
-    z-index: 1000;     /* Keeps it above all images/hero */
+    position: fixed;   
+    top: 0;            
+    left: 50%;         
+    transform: translateX(-50%);
+    z-index: 1000;     
     width: 90%;
     max-width: 1200px;
 }
@@ -30,7 +30,7 @@ body {
     gap: 25px;
     padding: 10px 20px;
     background-color: var(--color-navbar-bg);
-    margin: 0;         /* Ensures no default browser margin interferes */
+    margin: 0;         
 }
 
 .navbar a {
@@ -43,6 +43,13 @@ body {
 .navbar a:hover {
     font-style: italic;
     color: grey;
+}
+
+.navbar a.active {
+    color: var(--color-accent);
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
 }
 
 @media (max-width: 480px) {
@@ -99,10 +106,38 @@ body {
     margin-bottom: 30px;
 }
 
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+
+.filter-btn {
+    background-color: var(--color-navbar-bg);
+    color: var(--color-text-secondary);
+    border: 1px solid #333;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    color: white;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
 .gallery {
     column-count: 4;
     column-gap: 12px;
-    padding: 70px 20px 20px;
+    padding: 20px;
 }
 
 .gallery-item {
