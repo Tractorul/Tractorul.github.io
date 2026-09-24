@@ -15,9 +15,28 @@
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
-        <title>About - andreuptm</title>
+        <title>About &bull; andreuptm</title>
+
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "andreuptm",
+            "jobTitle": "Urban & Transport Photographer",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Bucharest",
+                "addressCountry": "Romania"
+            },
+            "sameAs": [
+                "https://instagram.com/andreuptm",
+                "https://github.com/Tractorul"
+            ]
+        }
+        </script>
     </head>
-    <body>
+    <body id="top">
         <header class="header">
             <nav class="navbar">
                 <div class="nav-container">
@@ -26,7 +45,7 @@
                         <span class="brand-badge">PHOTOGRAPHY</span>
                     </a>
                     
-                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>
@@ -45,14 +64,14 @@
         <main class="page-main">
             <section class="about-hero">
                 <div class="container about-grid">
-                    <div class="about-img-wrapper">
+                    <div class="about-img-wrapper reveal">
                         <img src="images/me.jpg" alt="Portrait of andreuptm - Bucharest urban photographer">
                         <div class="location-badge">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             Bucharest, Romania
                         </div>
                     </div>
-                    <div class="about-content">
+                    <div class="about-content reveal">
                         <span class="section-subtitle">Biography &amp; Kit</span>
                         <h1>About Me</h1>
                         <p class="tagline">Capturing moments in transit, public transport, and urban geometry.</p>
@@ -76,8 +95,8 @@
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
                                     </div>
                                     <div class="gear-details">
-                                        <span class="gear-label">Lens</span>
-                                        <strong>AF-S NIKKOR 18-55mm f/3.5-5.6G VR DX</strong>
+                                        <span class="gear-label">Lenses</span>
+                                        <strong>AF-S DX NIKKOR 35mm f/1.8G &bull; 18-105mm VR &bull; Sony 16-50mm OSS</strong>
                                     </div>
                                 </div>
                                 <div class="gear-card">

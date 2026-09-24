@@ -15,9 +15,20 @@
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
-        <title>Contact - andreuptm</title>
+        <title>Contact &bull; andreuptm</title>
+
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact andreuptm Photography",
+            "description": "Contact form and direct channels for commissions, print inquiries, and photography collaboration",
+            "url": "https://andreuptm.com/contact.html"
+        }
+        </script>
     </head>
-    <body>
+    <body id="top">
         <header class="header">
             <nav class="navbar">
                 <div class="nav-container">
@@ -26,7 +37,7 @@
                         <span class="brand-badge">PHOTOGRAPHY</span>
                     </a>
                     
-                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <button type="button" class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>
@@ -45,14 +56,14 @@
         <main class="page-main">
             <section class="contact-section">
                 <div class="container">
-                    <div class="contact-header">
+                    <div class="contact-header reveal">
                         <span class="section-subtitle">Get In Touch</span>
                         <h1>Contact &amp; Inquiries</h1>
                         <p class="qs">Have a photography project in mind, want to discuss urban transit shots, or explore a collaboration?</p>
                     </div>
 
                     <div class="contact-layout">
-                        <div class="form-wrapper">
+                        <div class="form-wrapper reveal">
                             <div class="form-card">
                                 <h2>Send a Message</h2>
                                 <p class="form-subtitle">Fill out the details below and I'll get back to you promptly.</p>
@@ -94,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div class="direct-methods">
+                        <div class="direct-methods reveal">
                             <div class="contact-card email-card">
                                 <div class="contact-card-icon">
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
