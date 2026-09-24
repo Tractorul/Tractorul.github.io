@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (filterBtns.length > 0 && galleryItems.length > 0) {
-        // Build searchIndex attribute for fast searching
         galleryItems.forEach(item => {
             const id = item.id || item.dataset.id || '';
             const title = item.dataset.title || '';
@@ -187,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
             item.dataset.searchIndex = `${id} ${title} ${category} ${camera} ${lens} ${location} ${tags} ${imgAlt}`;
         });
 
-        // Initialize from URL params
         const urlParams = new URLSearchParams(window.location.search);
         const filterParam = urlParams.get('filter');
         if (filterParam && ['transit', 'urban', 'aviation'].includes(filterParam)) {
@@ -331,7 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetImg = targetItem.querySelector('img');
             if (!targetImg) return;
 
-            viewerImg.src = targetImg.src;
+            const fullSrc = targetItem.dataset.full || targetImg.src;
+            viewerImg.src = fullSrc;
             viewerImg.alt = targetImg.alt || 'Photo Full View';
 
             const photoTitle = targetItem.dataset.title || targetImg.alt || 'Urban & Transport Photography';
@@ -342,6 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (viewerExif) {
                 const camera = targetItem.dataset.camera || 'Nikon D7000';
                 const lens = targetItem.dataset.lens || '';
+                const focal = targetItem.dataset.focal || '';
+                const aperture = targetItem.dataset.aperture || '';
+                const shutter = targetItem.dataset.shutter || '';
+                const iso = targetItem.dataset.iso || '';
                 const location = targetItem.dataset.location || 'Bucharest, Romania';
                 const category = targetItem.dataset.category || 'Transit';
                 const categoryFormatted = category.charAt(0).toUpperCase() + category.slice(1);
@@ -349,6 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let exifHTML = `<span class="exif-tag">${categoryFormatted}</span>`;
                 exifHTML += `<span class="exif-meta">&bull; ${camera}</span>`;
                 if (lens) exifHTML += `<span class="exif-meta">&bull; ${lens}</span>`;
+                if (focal && aperture) exifHTML += `<span class="exif-meta">&bull; ${focal} ${aperture}</span>`;
+                if (shutter && iso) exifHTML += `<span class="exif-meta">&bull; ${shutter} ISO${iso}</span>`;
                 exifHTML += `<span class="exif-meta">&bull; ${location}</span>`;
                 viewerExif.innerHTML = exifHTML;
             }
@@ -357,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 viewerCounter.textContent = `${currentIndex + 1} of ${visibleItems.length}`;
             }
 
-            // Update URL hash for deep-linking
             const photoId = targetItem.id || targetItem.dataset.id;
             if (updateHash && photoId && window.history.replaceState) {
                 const url = new URL(window.location);
@@ -457,7 +461,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Keyboard navigation and accessibility focus trap
         document.addEventListener('keydown', (e) => {
             if (!viewer.classList.contains('active')) return;
 
@@ -477,7 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (e.key === 's' || e.key === 'S') {
                 copyCurrentPhotoLink();
             } else if (e.key === 'Tab') {
-                // Focus trap
                 const focusable = viewer.querySelectorAll('button:not([disabled])');
                 if (focusable.length > 0) {
                     const first = focusable[0];
@@ -493,7 +495,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Touch swipe handling
         let touchStartX = 0;
         let touchEndX = 0;
         viewer.addEventListener('touchstart', (e) => {
@@ -512,28 +513,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        // Deep linking check on initial page load
-        if (window.location.hash) {
-            const hashId = window.location.hash.replace('#', '');
-            const matchingItem = galleryItems.find(item => item.id === hashId || item.dataset.id === hashId);
-            if (matchingItem) {
-                const category = matchingItem.dataset.category;
-                if (category && currentCategory !== 'all' && currentCategory !== category) {
-                    setCategory('all');
-                }
-                setTimeout(() => {
-                    const visibleItems = getVisibleItems();
-                    const index = visibleItems.indexOf(matchingItem);
-                    if (index !== -1) {
-                        openViewer(index, false);
+        // Handle initial hash routing
+        function checkHash() {
+            if (window.location.hash) {
+                const rawHash = window.location.hash.replace('#', '');
+                const targetId = rawHash.startsWith('photo-') ? rawHash : `photo-${rawHash}`;
+                const matchingItem = galleryItems.find(item => item.id === targetId || item.id === rawHash || item.dataset.id === rawHash);
+                if (matchingItem) {
+                    const category = matchingItem.dataset.category;
+                    if (category && currentCategory !== 'all' && currentCategory !== category) {
+                        setCategory('all');
                     }
-                }, 100);
+                    setTimeout(() => {
+                        const visibleItems = getVisibleItems();
+                        const index = visibleItems.indexOf(matchingItem);
+                        if (index !== -1) {
+                            openViewer(index, false);
+                        }
+                    }, 100);
+                }
             }
         }
+
+        checkHash();
+        window.addEventListener('hashchange', checkHash);
     }
 
     // -------------------------------------------------------------
-    // 6. Copy Email Button
+    // 6. Interactive Bucharest Photo Map (Leaflet)
+    // -------------------------------------------------------------
+    const mapEl = document.getElementById('bucharestMap');
+    if (mapEl && typeof L !== 'undefined') {
+        const map = L.map('bucharestMap', {
+            scrollWheelZoom: false
+        }).setView([44.455, 26.082], 12);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        const locations = [
+            {
+                name: "Pasajul Basarab & Podul Grant",
+                category: "Transit Corridor",
+                coords: [44.4503, 26.0682],
+                img: "images/thumbs/1.webp",
+                desc: "Modern light rail overpass, tram lines 1 & 10 movement.",
+                link: "photography.html#photo-1"
+            },
+            {
+                name: "Calea Victoriei & Universitate",
+                category: "Urban Geometry",
+                coords: [44.4357, 26.0998],
+                img: "images/thumbs/2.webp",
+                desc: "Historic Bucharest street perspective and architectural framing.",
+                link: "photography.html#photo-2"
+            },
+            {
+                name: "Băneasa Airport (BIAS Airshow)",
+                category: "Aviation Dynamics",
+                coords: [44.5032, 26.0841],
+                img: "images/thumbs/bias-2.webp",
+                desc: "Bucharest International Airshow, jet flypasts and aerobatics.",
+                link: "photography.html#photo-bias-2"
+            },
+            {
+                name: "Linia 41 Light Rail",
+                category: "Modern Transit",
+                coords: [44.4715, 26.0722],
+                img: "images/thumbs/astra.webp",
+                desc: "Astra Imperio trams operating along Bucharest's primary transit spine.",
+                link: "photography.html#photo-astra"
+            },
+            {
+                name: "Bulevardul Regina Elisabeta",
+                category: "Urban Transit",
+                coords: [44.4344, 26.0955],
+                img: "images/thumbs/3.webp",
+                desc: "City buses and public movement through Bucharest center.",
+                link: "photography.html#photo-3"
+            }
+        ];
+
+        locations.forEach(loc => {
+            const customIcon = L.divIcon({
+                className: 'custom-map-pin',
+                html: `<div style="background-color: #e5383b; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 10px rgba(229, 56, 59, 0.8);"></div>`,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7]
+            });
+
+            const popupContent = `
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; min-width: 180px; color: #f8f9fa;">
+                    <img src="${loc.img}" alt="${loc.name}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 8px;">
+                    <div style="font-size: 0.7rem; font-weight: 700; color: #e5383b; text-transform: uppercase;">${loc.category}</div>
+                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">${loc.name}</div>
+                    <div style="font-size: 0.8rem; color: #a0a5b1; margin-bottom: 8px;">${loc.desc}</div>
+                    <a href="${loc.link}" style="color: #e5383b; font-size: 0.8rem; font-weight: 600; text-decoration: none;">View in Gallery &rarr;</a>
+                </div>
+            `;
+
+            L.marker(loc.coords, { icon: customIcon })
+                .addTo(map)
+                .bindPopup(popupContent, {
+                    className: 'custom-leaflet-popup'
+                });
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 7. Copy Email Button
     // -------------------------------------------------------------
     const copyEmailBtn = document.getElementById('copyEmailBtn');
     if (copyEmailBtn) {
@@ -554,7 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
-    // 7. Contact Form Handling
+    // 8. Contact Form Handling
     // -------------------------------------------------------------
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -567,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
-    // 8. Back to Top Button
+    // 9. Back to Top Button
     // -------------------------------------------------------------
     const backToTopLink = document.querySelector('.back-to-top');
     if (backToTopLink) {

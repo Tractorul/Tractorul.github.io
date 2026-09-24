@@ -6,7 +6,7 @@
         <meta name="description" content="About @andreuptm - Bucharest based urban and transport photographer capturing public spaces, geometry, and motion with Nikon gear.">
         <meta property="og:title" content="About - andreuptm">
         <meta property="og:description" content="Urban and transport photographer based in Bucharest, Romania. Kit: Nikon D7000 &amp; Sony NEX-3N.">
-        <meta property="og:image" content="images/me.jpg">
+        <meta property="og:image" content="images/me.webp">
         <meta property="og:type" content="profile">
         <link rel="icon" type="image/svg+xml" href="favicon.svg">
         
@@ -14,25 +14,29 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+        <!-- Leaflet Dark Map CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
         <link rel="stylesheet" href="styles.css">
         <title>About &bull; andreuptm</title>
 
         <!-- Structured Data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "andreuptm",
-            "jobTitle": "Urban & Transport Photographer",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Bucharest",
-                "addressCountry": "Romania"
-            },
-            "sameAs": [
-                "https://instagram.com/andreuptm",
-                "https://github.com/Tractorul"
-            ]
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "andreuptm",
+          "jobTitle": "Urban & Transport Photographer",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bucharest",
+            "addressCountry": "Romania"
+          },
+          "url": "https://andreuptm.com",
+          "sameAs": [
+            "https://instagram.com/andreuptm",
+            "https://github.com/Tractorul"
+          ]
         }
         </script>
     </head>
@@ -65,7 +69,10 @@
             <section class="about-hero">
                 <div class="container about-grid">
                     <div class="about-img-wrapper reveal">
-                        <img src="images/me.jpg" alt="Portrait of andreuptm - Bucharest urban photographer">
+                        <picture>
+                            <source srcset="images/thumbs/me.webp" type="image/webp">
+                            <img src="images/me.jpg" alt="Portrait of andreuptm - Bucharest urban photographer" width="1109" height="1600">
+                        </picture>
                         <div class="location-badge">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             Bucharest, Romania
@@ -87,7 +94,7 @@
                                     </div>
                                     <div class="gear-details">
                                         <span class="gear-label">Camera Bodies</span>
-                                        <strong>Nikon D7000 &bull; Sony NEX-3N</strong>
+                                        <strong>Nikon D7000 (DX 16.2 MP) &bull; Sony NEX-3N</strong>
                                     </div>
                                 </div>
                                 <div class="gear-card">
@@ -96,7 +103,7 @@
                                     </div>
                                     <div class="gear-details">
                                         <span class="gear-label">Lenses</span>
-                                        <strong>AF-S DX NIKKOR 35mm f/1.8G &bull; 18-105mm VR &bull; Sony 16-50mm OSS</strong>
+                                        <strong>AF-S DX NIKKOR 18-55mm VR &bull; 35mm f/1.8G &bull; Sony 16-50mm OSS</strong>
                                     </div>
                                 </div>
                                 <div class="gear-card">
@@ -121,6 +128,21 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Interactive Bucharest Photo Locations Map -->
+            <section class="map-section reveal">
+                <div class="container">
+                    <div class="map-header">
+                        <span class="section-subtitle">Locations &amp; Perspective</span>
+                        <h2>Bucharest Photography Map</h2>
+                        <p>Explore key transit corridors, vantage points, and airshow coordinates where these shots were captured.</p>
+                    </div>
+
+                    <div class="map-container-wrapper">
+                        <div id="bucharestMap" aria-label="Interactive map of photography locations in Bucharest"></div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer class="site-footer">
@@ -138,6 +160,8 @@
             </div>
         </footer>
 
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="script.js" defer></script>
     </body>
 </html>
